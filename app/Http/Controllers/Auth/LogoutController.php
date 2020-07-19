@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LogoutController extends Controller
@@ -14,6 +15,11 @@ class LogoutController extends Controller
      */
     public function __invoke()
     {
-        return Auth::logout();
+        Auth::guard()->logout();
+
+        if (!Auth::guard()->check())
+            return 'Logout';
+
+        return response(null, 500); // internal server error
     }
 }
