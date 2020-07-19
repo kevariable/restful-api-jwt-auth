@@ -20,8 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::namespace('Auth')->group(function () {
     Route::post('register', 'RegisterController')->name('auth.register');
-    // Route::post('login', 'LoginController')->name('auth.login');
-    // Route::post('logout', 'LogoutController')->name('auth.logout');
+    Route::post('login', 'LoginController')->name('auth.login');
+    Route::post('logout', 'LogoutController')->name('auth.logout');
 });
 
-// Route::get('user', 'UserController');
+Route::get('user', 'UserController');
