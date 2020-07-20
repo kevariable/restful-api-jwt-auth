@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Article;
 use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
@@ -13,6 +12,6 @@ class Tag extends Model
 
     public function articles()
     {
-        return $this->morphTo(Article::class, 'articleable');
+        return $this->hasMany(Article::class);
     }
 }

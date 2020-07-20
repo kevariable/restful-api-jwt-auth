@@ -6,15 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
-    /**
-     * Mass Assignmenable
-     */
     protected $fillable = [
-        'title', 'slug', 'body', 'articleable_id', 'articleable_type'
+        'title', 'slug', 'body', 'tag_id'
     ];
 
-    public function articleable()
+    // public function getRouteKeyName()
+    // {
+    //     return 'slug';
+    // }
+
+    public function user()
     {
-        return $this->morphTo();
+        return $this->belongsTo(User::class);
+    }
+
+    public function tag()
+    {
+        return $this->belongsTo(Tag::class);
     }
 }

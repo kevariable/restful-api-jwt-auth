@@ -25,3 +25,13 @@ Route::namespace('Auth')->group(function () {
 });
 
 Route::get('user', 'UserController');
+
+Route::get('article', 'ArticleController@index');
+Route::get('article/{article:slug}', 'ArticleController@show');
+Route::group([
+    'prefix' => 'article', 'middleware' => 'auth:api'
+], function () {
+    Route::post('/', 'ArticleController@store');
+    Route::put('{article}', 'ArticleController@update');
+    Route::delete('{article}', 'ArticleController@destroy');
+});
