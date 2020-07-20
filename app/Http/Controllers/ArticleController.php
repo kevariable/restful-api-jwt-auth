@@ -41,10 +41,10 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function show(Article $article)
-    // {
-    //     return new ArticleResource($article);
-    // }
+    public function show(Article $article)
+    {
+        return new ArticleResource($article);
+    }
 
     /**
      * Update the specified resource in storage.
