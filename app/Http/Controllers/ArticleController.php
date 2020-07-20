@@ -53,14 +53,14 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function update(ArticleRequest $request, Article $article)
-    // {
-    //     $article->update(
-    //         $this->credentials($request)
-    //     );
+    public function update(ArticleRequest $request, Article $article)
+    {
+        $article->update(
+            $this->credentials($request)
+        );
 
-    //     return new ArticleResource($article);
-    // }
+        return new ArticleResource($article);
+    }
 
     // /**
     //  * Remove the specified resource from storage.
