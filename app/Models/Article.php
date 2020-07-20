@@ -10,6 +10,10 @@ class Article extends Model
         'title', 'slug', 'body', 'tag_id'
     ];
 
+    protected $with = [
+        'user',  'tag'
+    ];
+
     // public function getRouteKeyName()
     // {
     //     return 'slug';

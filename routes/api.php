@@ -32,6 +32,6 @@ Route::group([
     'prefix' => 'article', 'middleware' => 'auth:api'
 ], function () {
     Route::post('/', 'ArticleController@store');
-    Route::put('{article}', 'ArticleController@update');
-    Route::delete('{article}', 'ArticleController@destroy');
+    Route::patch('{article:slug}', 'ArticleController@update');
+    Route::delete('{article:slug}', 'ArticleController@destroy');
 });

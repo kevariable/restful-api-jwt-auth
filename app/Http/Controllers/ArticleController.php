@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Http\Requests\ArticleRequest;
 use App\Http\Resources\ArticleCollection;
 use App\Http\Resources\ArticleResource;
 use App\Models\Article;
-use App\Models\Tag;
 
 class ArticleController extends Controller
 {
@@ -19,7 +17,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return new ArticleCollection(Article::all());
+        return new ArticleCollection(Article::paginate(2));
     }
 
     /**
@@ -28,20 +26,14 @@ class ArticleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ArticleRequest $request)
-    {
-        $data = $request->all();
-        $data['slug'] = Str::slug($request->title);
+    // public function store(ArticleRequest $request)
+    // {
+    //     $user = auth()->user()->articles()->create(
+    //         $this->credentials($request)
+    //     );
 
-        $user = auth()->user()->articles()->create([
-            'title' => $data['title'],
-            'slug' => $data['slug'],
-            'body' => $data['body'],
-            'tag_id' => $data['tag']
-        ]);
-
-        return new ArticleResource($user);
-    }
+    //     return new ArticleResource($user);
+    // }
 
     /**
      * Display the specified resource.
@@ -49,10 +41,10 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article)
-    {
-        return new ArticleResource($article);
-    }
+    // public function show(Article $article)
+    // {
+    //     return new ArticleResource($article);
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -61,19 +53,35 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    // public function update(ArticleRequest $request, Article $article)
+    // {
+    //     $article->update(
+    //         $this->credentials($request)
+    //     );
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    //     return new ArticleResource($article);
+    // }
+
+    // /**
+    //  * Remove the specified resource from storage.
+    //  *
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function destroy(Article $article)
+    // {
+    //     $article->delete();
+
+    //     return 'Was deleted';
+    // }
+
+    // public function credentials($request)
+    // {
+    //     return [
+    //         'title' => $request->title,
+    //         'slug' => Str::slug($request->title),
+    //         'body' => $request->body,
+    //         'tag_id' => $request->tag
+    //     ];
+    // }
 }
