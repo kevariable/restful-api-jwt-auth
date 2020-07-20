@@ -62,26 +62,26 @@ class ArticleController extends Controller
         return new ArticleResource($article);
     }
 
-    // /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function destroy(Article $article)
-    // {
-    //     $article->delete();
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Article $article)
+    {
+        $article->delete();
 
-    //     return 'Was deleted';
-    // }
+        return 'Was deleted';
+    }
 
-    // public function credentials($request)
-    // {
-    //     return [
-    //         'title' => $request->title,
-    //         'slug' => Str::slug($request->title),
-    //         'body' => $request->body,
-    //         'tag_id' => $request->tag
-    //     ];
-    // }
+    public function credentials($request)
+    {
+        return [
+            'title' => $request->title,
+            'slug' => Str::slug($request->title),
+            'body' => $request->body,
+            'tag_id' => $request->tag
+        ];
+    }
 }
