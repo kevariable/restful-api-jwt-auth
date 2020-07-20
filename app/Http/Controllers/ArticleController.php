@@ -26,14 +26,14 @@ class ArticleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function store(ArticleRequest $request)
-    // {
-    //     $user = auth()->user()->articles()->create(
-    //         $this->credentials($request)
-    //     );
+    public function store(ArticleRequest $request)
+    {
+        $user = auth()->user()->articles()->create(
+            $this->credentials($request)
+        );
 
-    //     return new ArticleResource($user);
-    // }
+        return new ArticleResource($user);
+    }
 
     /**
      * Display the specified resource.
