@@ -17,3 +17,21 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::namespace('Auth')->group(function () {
+    Route::post('register', 'RegisterController')->name('auth.register');
+    Route::post('login', 'LoginController')->name('auth.login');
+    Route::post('logout', 'LogoutController')->name('auth.logout');
+});
+
+Route::get('user', 'UserController');
+
+Route::get('article', 'ArticleController@index');
+Route::get('article/{article:slug}', 'ArticleController@show');
+Route::group([
+    'prefix' => 'article', 'middleware' => 'auth:api'
+], function () {
+    Route::post('/', 'ArticleController@store');
+    Route::patch('{article:slug}', 'ArticleController@update');
+    Route::delete('{article:slug}', 'ArticleController@destroy');
+});
