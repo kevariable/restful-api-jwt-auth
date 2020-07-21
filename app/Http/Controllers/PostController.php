@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Post\StoreRequest;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Requests\Post\StoreRequest;
+use App\Http\Resources\PostResource;
+use App\Models\Tag;
 
 class PostController extends Controller
 {
@@ -25,7 +28,13 @@ class PostController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        dd($request->all());
+        $userPost = auth()->user()->posts()->create(
+            $this->credentials($request)
+        );
+
+        $userPost->tags()->sync($request->tags);
+
+        return new PostResource($userPost);
     }
 
     /**
@@ -60,5 +69,14 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function credentials($request)
+    {
+        return [
+            'title' => $request->title,
+            'slug' => Str::slug($request->title),
+            'body' => $request->body
+        ];
     }
 }

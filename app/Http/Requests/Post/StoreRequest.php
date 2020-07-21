@@ -25,7 +25,16 @@ class StoreRequest extends FormRequest
     {
         return [
             'title' => ['min:3', 'max:50', 'required'],
-            'body' => ['required']
+            'body' => ['required'],
+            'tags' => ['array', 'required'],
+            'tags.*' => ['exists:tags,id']
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'tags.*.exists' => 'error cuk gk nemu :v'
         ];
     }
 }
