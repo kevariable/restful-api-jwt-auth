@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,5 +25,12 @@ Route::group(
         Route::post('register', 'RegisterController');
         Route::post('login', 'LoginController');
         Route::post('logout', 'LogoutController');
+    }
+);
+
+Route::group(
+    ['prefix' => 'posts', 'middleware' => 'auth:api'],
+    function () {
+        Route::post('/', 'PostController@store');
     }
 );
