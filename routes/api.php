@@ -29,8 +29,12 @@ Route::group(
 );
 
 Route::group(
-    ['prefix' => 'posts', 'middleware' => 'auth:api'],
+    ['prefix' => 'posts'],
     function () {
+        Route::get('/', 'PostController@index');
+        Route::get('/{post:slug}', 'PostController@show');
         Route::post('/', 'PostController@store');
+        Route::patch('{post:slug}', 'PostController@update');
+        Route::delete('{post:slug}', 'PostController@destroy');
     }
 );
